@@ -13,7 +13,7 @@ const productRoutes=require("./routes/productRoutes")
 
 const dotenv = require("dotenv").config(); //to access the .env files we have to import dotenv
 
-const PORT = 4000;
+const PORT =process.env.PORT || 4000;
 
 //To start a server
 
@@ -33,7 +33,7 @@ app.use("/uploads", express.static('uploads'));  //images are stored in uploads 
 
 //CREATE A ROUTE
 
-app.use((req, res) => {
+app.use('/',(req, res) => {
   res.send("<h1>Welcome Mahesh Reddy</h1>");
 });
 
