@@ -13,12 +13,13 @@ const productRoutes=require("./routes/productRoutes")
 
 const dotenv = require("dotenv").config(); //to access the .env files we have to import dotenv
 
-const port =process.env.PORT || 4000;
+const PORT =process.env.PORT || 4000;
+// const port =4000
 
 //To start a server
 
-app.listen(port, () => {
-  console.log(`server started and running at ${port}`); //   ``TO PASS A VARIABLE DYNAMICALLY
+app.listen(PORT, () => {
+  console.log(`server started and running at ${PORT}`); //   ``TO PASS A VARIABLE DYNAMICALLY
 });
 
 app.use(bodyParser.json());
