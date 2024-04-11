@@ -1,6 +1,7 @@
 const Firm = require("../models/Firm");
 const Vendor = require("../models/Vendor");
 const multer = require("multer");
+const path=require('path')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -24,19 +25,29 @@ const addFirm = async (req, res) => {
       return res.status(404).json({ message: "vendor not found" });
     }
 
+    if (vendor.firm.length > 0) { // it checks if the vendor has a firm (restaurant) associated with it.
+      return res.status(400).json({ message: "Vendor can have only one Restaraunt" });
+  }
+
     const firm = new Firm({
       firmname,
       area,
       category,
       region,
       offer,
+      image,
       vendor: vendor._id,
     });
+
     const savedFirm=await firm.save();
     // the records should populate to vendor and pushed to vendor
     vendor.firm.push(savedFirm);
     await vendor.save()  //to save records in database
-    res.status(201).json({message:'Firm added successfully'})
+
+    const firmId = savedFirm._id
+    const vendorFirmName = savedFirm.firmname
+
+    return res.status(200).json({message:'Firm added successfully',firmId,vendorFirmName})
   } catch (error) {
     console.error(error)
     return res.status(500).json('Internal server error')

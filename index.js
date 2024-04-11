@@ -4,6 +4,7 @@ const app = express(); //assigning all express methods to app variable
 
 const { default: mongoose } = require("mongoose");
 const path=require('path')
+const cors=require('cors')
 
 const bodyParser = require("body-parser"); //the input values can be converted into json format using body-parser
 
@@ -16,6 +17,8 @@ const dotenv = require("dotenv").config(); //to access the .env files we have to
 const PORT =process.env.PORT || 4000;
 // const port =4000
 
+
+
 //To start a server
 
 app.listen(PORT, () => {
@@ -23,6 +26,8 @@ app.listen(PORT, () => {
 });
 
 app.use(bodyParser.json());
+
+app.use(cors())
 
 app.use("/vendor", vendorRoutes); //   /vendor=path
 
@@ -35,7 +40,7 @@ app.use("/uploads", express.static('uploads'));  //images are stored in uploads 
 //CREATE A ROUTE
 
 app.use('/',(req, res) => {
-  res.send("<h1>Welcome Mahesh Reddy</h1>");
+  res.send("Welcome Mahesh Reddy");
 });
 
 //db connection
