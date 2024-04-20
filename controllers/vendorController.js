@@ -46,7 +46,7 @@ const vendorLogin = async (req,res) => {
     //generate token
     const token=jwt.sign({vendorId:vendor._id},MySecretKey,{expiresIn:'6d'})
     const vendorId = vendor._id;
-    res.status(200).json({success:'Login Successful',token,email})
+    res.status(200).json({success:'Login Successful',token,email,vendorId})
     console.log(email,password,'jwt token is',token)
     
   } catch (error) {
@@ -78,7 +78,8 @@ const getVendorById=async(req,res)=>{
     if(!vendor){
       return res.status(404).json({msg:"vendor not found"})
     }
-    res.status(200).json({vendor})
+    const vendorRestId=vendor.firm[0].id;
+    res.status(200).json({vendor,vendorRestId,vendorId})
     
   } catch (error) {
     console.log(error);

@@ -9,6 +9,6 @@ router.post('/register',vendorRegister)    // /register=endpoint
 
 router.post('/login',vendorLogin) 
 router.get('/all-vendors',getAllVendors) 
-router.get('/all-vendors/:id',getVendorById) 
+router.get('/single-vendor/:id',getVendorById) 
 
 module.exports=router

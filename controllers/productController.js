@@ -34,6 +34,7 @@ const addProduct = async (req, res) => {
       productName,
       price,
       category,
+      image,
       bestSeller,
       description,
       firm: firm._id,
